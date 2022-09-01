@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { InputFieldValidator } from 'app/_helper/InputFieldValidator';
 import { DepartmentService } from 'app/_services/Department.service';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./departments.component.css']
 })
 export class DepartmentsComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted: boolean;
   loading: boolean;
   isUpdate: boolean;
@@ -18,7 +18,7 @@ export class DepartmentsComponent implements OnInit {
   searchData = "";
   RecordCount: any;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private _inputField: InputFieldValidator,
     private _service:DepartmentService,
     private toastr:ToastrService

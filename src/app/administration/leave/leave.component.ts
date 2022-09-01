@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { InputFieldValidator } from 'app/_helper/InputFieldValidator';
 import { EmpcategoryService } from 'app/_services/empcategory.service';
 import { SharedService } from 'app/_services/shared.service';
@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./leave.component.css']
 })
 export class LeaveComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted: boolean;
   loading: boolean;
   isUpdate: boolean;
@@ -23,7 +23,7 @@ export class LeaveComponent implements OnInit {
   currentDate: any;
  
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private _inputField: InputFieldValidator,
     private _service:SharedService,
     private toastr:ToastrService,

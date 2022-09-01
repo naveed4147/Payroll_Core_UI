@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { InputFieldValidator } from '../../_helper/InputFieldValidator';
@@ -12,13 +12,13 @@ import { SharedService } from '../../_Services/shared.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted: boolean;
   fieldTextType: boolean;
   Link:string = "/Account/";
   loading: boolean;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private _service:SharedService,
     private _inputField:InputFieldValidator,
     private toastr: ToastrService,

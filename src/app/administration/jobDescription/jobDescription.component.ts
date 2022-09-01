@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { InputFieldValidator } from '../../_helper/InputFieldValidator';
 import { DepartmentService } from '../../_services/Department.service';
@@ -14,7 +14,7 @@ import { SkillsService } from '../../_services/skills.service';
   styleUrls: ['./jobDescription.component.css']
 })
 export class JobDescriptionComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted: boolean;
   loading: boolean;
   isUpdate: boolean;
@@ -29,7 +29,7 @@ export class JobDescriptionComponent implements OnInit {
  
  
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private _inputField: InputFieldValidator,
     private _service:SharedService,
     private toastr:ToastrService,

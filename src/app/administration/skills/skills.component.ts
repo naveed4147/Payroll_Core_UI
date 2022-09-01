@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { InputFieldValidator } from 'app/_helper/InputFieldValidator';
 import { SkillsService } from 'app/_services/skills.service';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./skills.component.css']
 })
 export class SkillsComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted: boolean;
   loading: boolean;
   isUpdate: boolean;
@@ -19,7 +19,7 @@ export class SkillsComponent implements OnInit {
   SkillsList: any;
   RecordCount: any;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private _inputField: InputFieldValidator,
     private _service:SkillsService,
     private toastr:ToastrService

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { InputFieldValidator } from 'app/_helper/InputFieldValidator';
 import { DepartmentService } from 'app/_services/Department.service';
 import { RolesService } from 'app/_services/roles.service';
@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted: boolean;
   loading: boolean;
   isUpdate: boolean;
@@ -22,7 +22,7 @@ export class UsersComponent implements OnInit {
   searchData = "";
   RecordCount: any;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private _service:UsersService,
     private toastr:ToastrService,
     private _inputField: InputFieldValidator,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { ToastrService } from 'ngx-toastr';
 import { InputFieldValidator } from '../../_helper/InputFieldValidator';
@@ -11,7 +11,7 @@ import { SharedService } from '../../_Services/shared.service';
   styleUrls: ['./costCenters.component.css']
 })
 export class CostCentersComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted: boolean;
   loading: boolean;
   isUpdate: boolean;
@@ -22,7 +22,7 @@ export class CostCentersComponent implements OnInit {
  
  
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private _inputField: InputFieldValidator,
     private _service:SharedService,
     private toastr:ToastrService
