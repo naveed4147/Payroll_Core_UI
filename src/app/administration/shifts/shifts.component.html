@@ -1,0 +1,211 @@
+<!--Loading Area-->
+<div *ngIf="loading" class="loader-box">
+  <div class="loader"></div>
+  <div class="textt">LOADING...</div>
+</div>
+<!--Loading Area End-->
+<div class="row">
+  <div class="col-md-12 col-md-12 pl-md-0 pr-md-0">
+    <div class="card card-user">
+
+      <div class="card-body pb-0">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card-stats">
+              <div class="card-body color-boxes green-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-user"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Total Records</p>
+                      <p class="card-title">{{RecordCount}}
+                      <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class=" card-stats">
+              <div class="card-body color-boxes blue-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-money"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Dummy</p>
+                      <p class="card-title">$ 1,345
+                      <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class=" card-stats">
+              <div class="card-body color-boxes purple-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-list"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Dummy</p>
+                      <p class="card-title">23
+                      <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="card-header">
+        <h5 class="card-title"> New Shift </h5>
+      </div>
+
+
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <input type="hidden" formControlName="Id">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Shift Code </label>
+                <input type="text" class="form-control" [readOnly]="isUpdate" placeholder="Enter Code"
+                  (keypress)="omitSpecialCharacterAndSpace($event)" formControlName="ShiftCode"
+                  [ngClass]="{ 'is-invalid': submitted && f.ShiftCode.errors }">
+                <div *ngIf="submitted && f.ShiftCode.errors" class="invalid-feedback">
+                  <div *ngIf="f.ShiftCode.errors.required"> Code is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Shift Description</label>
+                <input type="text" class="form-control" placeholder="ShiftDescription" value=""
+                  placeholder="Enter Deparment Name" formControlName="ShiftDescription"
+                  [ngClass]="{ 'is-invalid': submitted && f.ShiftDescription.errors }">
+                <div *ngIf="submitted && f.ShiftDescription.errors" class="invalid-feedback">
+                  <div *ngIf="f.ShiftDescription.errors.required"> Description is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Start Time </label>
+                <input type="time" class="form-control"  placeholder="Enter Code"
+                  (keypress)="omitSpecialCharacterAndSpace($event)" formControlName="StartTime"
+                  [ngClass]="{ 'is-invalid': submitted && f.StartTime.errors }">
+                <div *ngIf="submitted && f.StartTime.errors" class="invalid-feedback">
+                  <div *ngIf="f.StartTime.errors.required"> Start Time is required</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>End Time</label>
+                <input type="time" class="form-control" placeholder="EndTime" value=""
+                  placeholder="Enter Deparment Name" formControlName="EndTime"
+                  [ngClass]="{ 'is-invalid': submitted && f.EndTime.errors }">
+                <div *ngIf="submitted && f.EndTime.errors" class="invalid-feedback">
+                  <div *ngIf="f.EndTime.errors.required"> End Time is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Break Hours</label>
+                <input type="number" class="form-control" placeholder="BreakHours" value=""
+                  placeholder="Enter Deparment Name" formControlName="BreakHours"
+                  [ngClass]="{ 'is-invalid': submitted && f.BreakHours.errors }">
+                <div *ngIf="submitted && f.BreakHours.errors" class="invalid-feedback">
+                  <div *ngIf="f.BreakHours.errors.required"> Break Hours are required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 text-right">
+              <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> <span
+                  *ngIf="!isUpdate"> Create Shift</span> <span *ngIf="isUpdate"> Update Shift</span>
+              </button>
+              <button type="reset" class="btn btn-danger ml-2" (click)="clearForm()"><i class="fa fa-ban"></i>
+                Reset</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card-header">
+            <h5 class="card-title"> <i class="fa fa-align-justify"></i> Shifts List </h5>
+          </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-header">
+              <div class="card-title text-right">
+                Search Here: <input type="text" [(ngModel)]="searchData">
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Shift Code</th>
+              <th>Shift Description</th>
+             
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Break Hours</th>
+             
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr *ngFor='let p of shiftsList | filter:searchData; let i = index'>
+                <td>{{p.shiftCode}} </td>
+                <td>{{p.shiftDescription}} </td>
+                <td>{{p.startTime}} </td>
+                <td>{{p.endTime}} </td>
+                <td>{{p.breakHours}} </td>
+                
+
+                <td>
+                  <i class="fa fa-edit clickable" (click)="Update(p)"></i>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

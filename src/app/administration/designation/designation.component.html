@@ -1,0 +1,98 @@
+<div class="animated fadeIn">
+
+  <!--Loading Area-->
+  <div *ngIf="loading" class="loader-box">
+    <div class="loader"></div>
+    <div class="textt">LOADING...</div>
+  </div>
+  <!--Loading Area End-->
+  
+      <div class="card">
+        <div class="card-header bg-primary">
+          <strong>New Branch</strong>
+          <small>Form</small>
+        </div>
+        <div class="card-body">
+         <!--form here-->
+         <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <input type="hidden" formControlName="Id">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Designation Code </label>
+                <input type="text" class="form-control" [readOnly]="isUpdate" placeholder="Enter Code"
+                  (keypress)="omitSpecialCharacterAndSpace($event)" formControlName="DesignationCode"
+                  [ngClass]="{ 'is-invalid': submitted && f.DesignationCode.errors }">
+                <div *ngIf="submitted && f.DesignationCode.errors" class="invalid-feedback">
+                  <div *ngIf="f.DesignationCode.errors.required"> Code is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Designation Name</label>
+                <input type="text" class="form-control" placeholder="DesignationName" value=""
+                  placeholder="Enter Deparment Name" formControlName="DesignationName"
+                  [ngClass]="{ 'is-invalid': submitted && f.DesignationName.errors }">
+                <div *ngIf="submitted && f.DesignationName.errors" class="invalid-feedback">
+                  <div *ngIf="f.DesignationName.errors.required"> Name is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 text-right">
+              <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> <span
+                  *ngIf="!isUpdate"> Create Designation</span> <span *ngIf="isUpdate"> Update Desigation</span>
+              </button>
+              <button type="reset" class="btn btn-danger ml-2" (click)="clearForm()"><i class="fa fa-ban"></i>
+                Reset</button>
+            </div>
+          </div>
+        </form>
+
+   </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header bg-primary">
+              <i class="fa fa-align-justify"></i> Branches List
+              <span class="text-right" style="float: right;">
+               Search Here: <input type="text" [(ngModel)]="searchData">
+              </span>
+            </div>
+            <div class="card-body">
+              <div class="tableFixHead">
+              <!--table herer-->
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>Desigation Code</th>
+                  <th>Desigation Name</th>
+                 
+                  <th>Actions</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor='let p of DesignationList | filter:searchData; let i = index'>
+                    <td>{{p.designationCode}} </td>
+                    <td>{{p.designationName}} </td>
+                    
+                    <td>
+                      <i class="fa fa-edit clickable" (click)="Update(p)"></i>
+                    </td>
+    
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+  
+  
+  </div>
+  

@@ -1,0 +1,341 @@
+<!--Loading Area-->
+<div *ngIf="loading" class="loader-box">
+  <div class="loader"></div>
+  <div class="textt">LOADING...</div>
+</div>
+<!--Loading Area End-->
+<div class="row">
+  <div class="col-md-12 col-md-12 pl-md-0 pr-md-0">
+    <div class="card card-user">
+
+      <div class="card-body pb-0">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card-stats">
+              <div class="card-body color-boxes green-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-user"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Total Records</p>
+                      <p class="card-title">{{RecordCount}}
+                        <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class=" card-stats">
+              <div class="card-body color-boxes blue-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-money"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Dummy</p>
+                      <p class="card-title">$ 1,345
+                        <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class=" card-stats">
+              <div class="card-body color-boxes purple-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-list"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Dummy</p>
+                      <p class="card-title">23
+                        <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="card-header">
+        <h5 class="card-title"> New Loan </h5>
+      </div>
+
+
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <input type="hidden" formControlName="Id">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Code </label>
+                <input type="text" class="form-control" [readOnly]="isUpdate" placeholder="Enter Code"
+                  (keypress)="omitSpecialCharacterAndSpace($event)" formControlName="Code"
+                  [ngClass]="{ 'is-invalid': submitted && f.Code.errors }">
+                <div *ngIf="submitted && f.Code.errors" class="invalid-feedback">
+                  <div *ngIf="f.Code.errors.required"> Code is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Description</label>
+                <input type="text" class="form-control" placeholder="Description" value=""
+                  placeholder="Enter Deparment Name" formControlName="Description"
+                  [ngClass]="{ 'is-invalid': submitted && f.Description.errors }">
+                <div *ngIf="submitted && f.Description.errors" class="invalid-feedback">
+                  <div *ngIf="f.Description.errors.required"> Description is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Total Leaves/Year</label>
+                <input type="text" class="form-control" (keypress)="onlyNumber($event)" placeholder="Enter AnnualLeave" formControlName="AnnualLeave"
+                  [ngClass]="{ 'is-invalid': submitted && f.AnnualLeave.errors }">
+                <div *ngIf="submitted && f.AnnualLeave.errors" class="invalid-feedback">
+                  <div *ngIf="f.AnnualLeave.errors.required"> Annual Leaves are required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Leave Type</label>
+                <select class="form-control" formControlName="LeaveType"
+                  [ngClass]="{ 'is-invalid': submitted && f.LeaveType.errors }">
+               
+                  <option value="">Select Leave Type</option>
+                  <option value="Annual">Annual</option>
+                  <option value="Sick">Sick</option>
+                  <option value="Bereavement">Bereavement</option>
+                  <option value="National">National</option>
+                  <option value="Holidays">Holidays</option>
+                  <option value="Marriage">Marriage</option>
+
+                </select>
+                <div *ngIf="submitted && f.LeaveType.errors" class="invalid-feedback">
+                  <div *ngIf="f.LeaveType.errors.required"> Leave Type is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Applicable Employee Type</label>
+                <select class="form-control" formControlName="EmployeeType"
+                  [ngClass]="{ 'is-invalid': submitted && f.EmployeeType.errors }">
+                  <option value="">Select Employee Type</option>
+                  <option value="Employee">Employee</option>
+                  <option value="Manager">Manager</option>
+                </select>
+                <div *ngIf="submitted && f.EmployeeType.errors" class="invalid-feedback">
+                  <div *ngIf="f.EmployeeType.errors.required"> Employee Type is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Minimum Leave for Encashment</label>
+                <input type="text" class="form-control" (keypress)="onlyNumber($event)" placeholder="Enter MinEncashment" formControlName="MinEncashment"
+                  [ngClass]="{ 'is-invalid': submitted && f.MinEncashment.errors }">
+                <div *ngIf="submitted && f.MinEncashment.errors" class="invalid-feedback">
+                  <div *ngIf="f.MinEncashment.errors.required"> Minimum Leave for Encashment are required</div>
+                </div>
+              </div>
+            </div>
+         
+          </div>
+          <div class="row">
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Maximum Leave for Encashment</label>
+                <input type="text" class="form-control" (keypress)="onlyNumber($event)" placeholder="Enter MaxEncashment" formControlName="MaxEncashment"
+                  [ngClass]="{ 'is-invalid': submitted && f.MaxEncashment.errors }">
+                <div *ngIf="submitted && f.MaxEncashment.errors" class="invalid-feedback">
+                  <div *ngIf="f.MaxEncashment.errors.required"> Minimum Leave for Encashment are required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> From Date</label>
+                <input type="date" [(ngModel)]="currentDate" class="form-control" placeholder="Enter FromDate" formControlName="FromDate"
+                  [ngClass]="{ 'is-invalid': submitted && f.FromDate.errors }">
+                <div *ngIf="submitted && f.FromDate.errors" class="invalid-feedback">
+                  <div *ngIf="f.FromDate.errors.required"> From Date is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> To Date</label>
+                <input type="date" class="form-control" placeholder="Enter ToDate" formControlName="ToDate"
+                  [ngClass]="{ 'is-invalid': submitted && f.ToDate.errors }">
+                <div *ngIf="submitted && f.ToDate.errors" class="invalid-feedback">
+                  <div *ngIf="f.ToDate.errors.required"> To Date is required</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Status</label>
+                <select class="form-control" formControlName="Status"
+                  [ngClass]="{ 'is-invalid': submitted && f.Status.errors }">
+                  <option value="">Select Status</option>
+                  <option value="true">Active</option>
+                  <option value="false">InActive</option>
+                </select>
+                <div *ngIf="submitted && f.Status.errors" class="invalid-feedback">
+                  <div *ngIf="f.Status.errors.required"> Status is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Payable Leave </label>
+                <input type="checkbox" class="" formControlName="PayableLeave" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Encashabale </label>
+                <input type="checkbox" class="" formControlName="EncashabaleLeave" />
+              </div>
+            </div>
+
+            
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Carry forward to Next Year </label>
+                <input type="checkbox" class="" formControlName="ForwardNext" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Leave Paid in Advance </label>
+                <input type="checkbox" class="" formControlName="PaidAdvance" />
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Remarks </label>
+                <textarea class="form-control" formControlName="Remarks"></textarea>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-12 text-right">
+              <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> <span
+                  *ngIf="!isUpdate"> Create </span> <span *ngIf="isUpdate"> Update</span>
+              </button>
+              <button type="reset" class="btn btn-danger ml-2" (click)="clearForm()"><i class="fa fa-ban"></i>
+                Reset</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card-header">
+            <h5 class="card-title"> <i class="fa fa-align-justify"></i>Loan List </h5>
+          </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-header">
+              <div class="card-title text-right">
+                Search Here: <input type="text" [(ngModel)]="searchData">
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+             
+              <th>Code</th>
+              <th>Description</th>
+              <th>Total Leaves/Year</th>
+              <th>Leave Type</th>
+              <th>Payable Leave</th>
+              <th>Encashabale Leave</th>
+              <th>Applicable Employee Type</th>
+              <th>Status</th>
+              <th>Minimum Leave for Encashment</th>
+              <th>Maximum Leave for Encashment</th>
+              <th>Leave Paid in Advance</th>
+              <th>Carry forward to Next Year</th>
+              <th>From Date</th>
+              <th>To Date</th>
+              <th>Remarks</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr *ngFor='let p of LeavesList | filter:searchData; let i = index'>
+                <td>{{p.code}} </td>
+                <td>{{p.description}} </td>
+                <td>{{p.annualLeave}} </td>
+                <td>{{p.leaveType}} </td>
+                <td>{{p.payableLeave}} </td>
+                <td>{{p.encashabaleLeave}} </td>
+                <td>{{p.employeeType}} </td>
+                <td>{{p.status}} </td>
+                <td>{{p.minEncashment}} </td>
+                <td>{{p.maxEncashment}} </td>
+                <td>{{p.paidAdvance}} </td>
+                <td>{{p.forwardNext}} </td>
+                <td>{{p.fromDate| date:'dd-MM-yyyy'}} </td>
+                <td>{{p.toDate| date:'dd-MM-yyyy'}} </td>
+                <td>{{p.remarks}} </td>
+                
+
+                <td>
+                  <i class="fa fa-edit clickable" (click)="Update(p)"></i>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

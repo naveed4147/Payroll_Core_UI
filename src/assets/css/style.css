@@ -1,0 +1,9 @@
+.required:after {
+    content:" *";
+    color: red;
+  }
+  /* .input-group-prepend {
+    position: absolute;
+    right: 5px;
+    top: 29px;
+} */

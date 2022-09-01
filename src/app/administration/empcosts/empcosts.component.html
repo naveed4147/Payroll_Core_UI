@@ -1,0 +1,198 @@
+<!--Loading Area-->
+<div *ngIf="loading" class="loader-box">
+  <div class="loader"></div>
+  <div class="textt">LOADING...</div>
+</div>
+<!--Loading Area End-->
+<div class="row">
+  <div class="col-md-12 col-md-12 pl-md-0 pr-md-0">
+    <div class="card card-user">
+
+      <div class="card-body pb-0">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card-stats">
+              <div class="card-body color-boxes green-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-user"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Total Records</p>
+                      <p class="card-title">{{RecordCount}}
+                        <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class=" card-stats">
+              <div class="card-body color-boxes blue-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-money"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Revenue</p>
+                      <p class="card-title">$ 1,345
+                        <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class=" card-stats">
+              <div class="card-body color-boxes purple-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-list"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Errors</p>
+                      <p class="card-title">23
+                        <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="card-header">
+        <h5 class="card-title"> New Employee Cost </h5>
+      </div>
+
+
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <input type="hidden" formControlName="Id">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Code </label>
+                <input type="text" class="form-control" [readOnly]="isUpdate" placeholder="Enter Code"
+                  (keypress)="omitSpecialCharacterAndSpace($event)" formControlName="Code"
+                  [ngClass]="{ 'is-invalid': submitted && f.Code.errors }">
+                <div *ngIf="submitted && f.Code.errors" class="invalid-feedback">
+                  <div *ngIf="f.Code.errors.required"> Code is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Description</label>
+                <input type="text" class="form-control" placeholder="Description" value="" formControlName="Description"
+                  [ngClass]="{ 'is-invalid': submitted && f.Description.errors }">
+                <div *ngIf="submitted && f.Description.errors" class="invalid-feedback">
+                  <div *ngIf="f.Description.errors.required"> Description is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Fixed</label>
+                <!-- <input type="text" class="form-control" placeholder="Pay Month" value=""
+                 formControlName="Fixed"
+                  [ngClass]="{ 'is-invalid': submitted && f.Fixed.errors }"> -->
+
+                <select class="form-control" placeholder="Pay Month" (change)="onChangeFixed()" formControlName="Fixed"
+                  [ngClass]="{ 'is-invalid': submitted && f.Fixed.errors }">
+                  <option value="">Select Fixed</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+                <div *ngIf="submitted && f.Fixed.errors" class="invalid-feedback">
+                  <div *ngIf="f.Fixed.errors.required"> Fixed is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4" *ngIf="FixedValue == 'No'">
+              <div class="form-group">
+                <label> Amount </label>
+                <input type="text" class="form-control" (keypress)="onlyNumber($event)" placeholder="Enter Amount Date" formControlName="Amount"
+                  [ngClass]="{ 'is-invalid': submitted && f.Amount.errors }">
+                <div *ngIf="submitted && f.Amount.errors" class="invalid-feedback">
+                  <div *ngIf="f.Amount.errors.required"> Amount is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+          <div class="row">
+            <div class="col-md-12 text-right">
+              <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> <span *ngIf="!isUpdate">
+                  Create</span> <span *ngIf="isUpdate"> Update</span>
+              </button>
+              <button type="reset" class="btn btn-danger ml-2" (click)="clearForm()"><i class="fa fa-ban"></i>
+                Reset</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card-header">
+            <h5 class="card-title"> <i class="fa fa-align-justify"></i> Employee Costs List </h5>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card-header">
+            <div class="card-title text-right">
+              Search Here: <input type="text" [(ngModel)]="searchData">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th> Code</th>
+              <th> Description</th>
+              <th>Fixed</th>
+              <th> Amount</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr *ngFor='let p of EmpCostList | filter:searchData; let i = index'>
+                <td>{{p.code}} </td>
+                <td>{{p.description}} </td>
+                <td>{{p.fixed}} </td>
+                <td>{{p.amount}} </td>
+               
+
+                <td>
+                  <i class="fa fa-edit clickable" (click)="Update(p)"></i>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

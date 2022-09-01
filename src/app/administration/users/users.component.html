@@ -1,0 +1,260 @@
+
+
+<div class="row">
+  <div class="col-md-12 pl-md-0 pr-md-0">
+    <div class="card card-user">
+      
+      <div class="card-body pb-0">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card-stats">
+              <div class="card-body color-boxes green-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-user"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Total Records</p>
+                      <p class="card-title">{{RecordCount}}
+                      <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class=" card-stats">
+              <div class="card-body color-boxes blue-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-money"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Dummy</p>
+                      <p class="card-title">$ 1,345
+                      <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class=" card-stats">
+              <div class="card-body color-boxes purple-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-list"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Dummy</p>
+                      <p class="card-title">23
+                      <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+     
+      <div class="card-header">
+        <h5 class="card-title"> User Registration </h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <input type="hidden" formControlName="Id">
+          <div class="row">
+            <div class="col-md-4 ">
+              <div class="form-group">
+                <label> User Code </label>
+                <input type="text" class="form-control" (paste)="(false)" [readOnly]="isUpdate"
+                  placeholder="Enter your User Code" (keypress)="omitSpecialCharacterAndSpace($event)"
+                  formControlName="UserCode" [ngClass]="{ 'is-invalid': submitted && f.UserCode.errors }">
+                <div *ngIf="submitted && f.UserCode.errors" class="invalid-feedback">
+                  <div *ngIf="f.UserCode.errors.required">User Code is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4  ">
+              <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" placeholder="Username" value="" (paste)="(false)"
+                  [readOnly]="isUpdate" placeholder="Enter your User Name"
+                  (keypress)="omitSpecialCharacterAndSpace($event)" formControlName="UserName"
+                  [ngClass]="{ 'is-invalid': submitted && f.UserName.errors }">
+                <div *ngIf="submitted && f.UserName.errors" class="invalid-feedback">
+                  <div *ngIf="f.UserName.errors.required">User Name is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4  ">
+              <div class="form-group">
+                <label> Mobile Number </label>
+                <input type="text" class="form-control" placeholder="0923211234567" (keypress)="onlyNumber($event)"
+                  (paste)="(false)" maxlength="13" value="" formControlName="MobileNo"
+                  [ngClass]="{ 'is-invalid': submitted && f.MobileNo.errors }">
+                <div *ngIf="submitted && f.MobileNo.errors" class="invalid-feedback">
+                  <div *ngIf="f.MobileNo.errors.required">Mobiel No is required</div>
+                  <div *ngIf="f.MobileNo.errors.minlength">Tel. No must be at least 10 characters long.</div>
+                  <div *ngIf="f.MobileNo.errors.maxlength">Tel. No must 13 characters long.</div>
+                  <div *ngIf="f.MobileNo.errors.pattern">Only Numeric value required.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 ">
+              <div class="form-group">
+                <label for="exampleInputEmail1"> Email ID </label>
+                <input type="email" class="form-control" placeholder="email@email.com" formControlName="EmailId"
+                  [ngClass]="{ 'is-invalid': submitted && f.EmailId.errors }">
+                <div *ngIf="submitted && f.EmailId.errors" class="invalid-feedback">
+                  <div *ngIf="f.EmailId.errors.required">Email ID is required</div>
+                  <div *ngIf="f.EmailId.errors.pattern">Invalid Email Format.</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4  ">
+              <div class="form-group">
+                <label> Department </label>
+                <select name="" class="form-control" formControlName="DepartmentID"
+                  [ngClass]="{ 'is-invalid': submitted && f.DepartmentID.errors }">
+                  <option value="" disabled>Choose a Department</option>
+                  <option *ngFor='let p of DeptList' [ngValue]='p.id'>{{p.departmentName}}</option>
+                </select>
+                <div *ngIf="submitted && f.DepartmentID.errors" class="invalid-feedback">
+                  <div *ngIf="f.DepartmentID.errors.required">Deparment is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Employee ID </label>
+                <input type="text" class="form-control" placeholder="Employee ID" value="" formControlName="EmployeeId"
+                  [ngClass]="{ 'is-invalid': submitted && f.EmployeeId.errors }">
+                <div *ngIf="submitted && f.EmployeeId.errors" class="invalid-feedback">
+                  <div *ngIf="f.EmployeeId.errors.required">Employee ID is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Employee Name </label>
+                <input type="text" class="form-control" placeholder="Employee Name" value=""
+                  formControlName="EmployeeName" [ngClass]="{ 'is-invalid': submitted && f.EmployeeName.errors }">
+                <div *ngIf="submitted && f.EmployeeName.errors" class="invalid-feedback">
+                  <div *ngIf="f.EmployeeName.errors.required">Employee Name is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="form-group">
+                  <label> User Type </label>
+                  <select name="" class="form-control" formControlName="RoleID"
+                    [ngClass]="{ 'is-invalid': submitted && f.RoleID.errors }">
+                    <option value="" disabled>Choose a Role</option>
+                    <option *ngFor='let p of RolesList' [ngValue]='p.id'>{{p.roleName}}</option>
+
+                  </select>
+                  <div *ngIf="submitted && f.RoleID.errors" class="invalid-feedback">
+                    <div *ngIf="f.RoleID.errors.required">User Rol Name is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Password </label>
+                <input type="password" class="form-control" placeholder="*******" value="" formControlName="Password"
+                  [ngClass]="{ 'is-invalid': submitted && f.Password.errors }">
+                <div *ngIf="submitted && f.Password.errors" class="invalid-feedback">
+                  <div *ngIf="f.Password.errors.required">Password is required</div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 text-right">
+              <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> <span *ngIf="!isUpdate">
+                  Create User</span> <span *ngIf="isUpdate"> Update User</span> </button>
+              <button type="reset" class="btn btn-danger ml-2" (click)="clearForm()"><i class="fa fa-ban"></i>
+                Reset</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card-header">
+            <h5 class="card-title"> <i class="fa fa-align-justify"></i> User Lists </h5>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card-header">
+            <div class="card-title text-right">
+              Search Here: <input type="text" [(ngModel)]="searchData">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>User Code</th>
+              <th>User Name</th>
+              <th>Full Name</th>
+              <th>Department</th>
+              <th>Role</th>
+              <th>Email</th>
+              <th>Mobile No</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr *ngFor='let p of UsersList | filter:searchData; let i = index'>
+                <td>{{p.userCode}} </td>
+                <td>{{p.userName}} </td>
+                <td>{{p.employeeName}} </td>
+                <td>{{p.departmentName}} </td>
+                <td>{{p.roleName}} </td>
+                <td>{{p.emailId}} </td>
+                <td>{{p.mobileNo}} </td>
+                <td>
+                  <i class="fa fa-edit clickable" (click)="Update(p)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

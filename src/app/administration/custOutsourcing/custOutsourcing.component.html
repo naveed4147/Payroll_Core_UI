@@ -1,0 +1,382 @@
+<!--Loading Area-->
+<div *ngIf="loading" class="loader-box">
+  <div class="loader"></div>
+  <div class="textt">LOADING...</div>
+</div>
+<!--Loading Area End-->
+<div class="row">
+  <div class="col-md-12 col-md-12 pl-md-0 pr-md-0">
+    <div class="card card-user">
+
+      <div class="card-body pb-0">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card-stats">
+              <div class="card-body color-boxes green-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-user"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Total Records</p>
+                      <p class="card-title">{{RecordCount}}
+                        <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class=" card-stats">
+              <div class="card-body color-boxes blue-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-money"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Dummy</p>
+                      <p class="card-title">$ 1,345
+                        <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class=" card-stats">
+              <div class="card-body color-boxes purple-bg-color">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big icon-warning">
+                      <i class="fa fa-list"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Dummy</p>
+                      <p class="card-title">23
+                        <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="card-header">
+        <h5 class="card-title"> New Customer Outsourcing </h5>
+      </div>
+
+
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <input type="hidden" formControlName="Id">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>  Cust Code </label>
+                <input type="text" class="form-control" [readOnly]="isUpdate" placeholder="Enter CustCode"
+                  (keypress)="omitSpecialCharacterAndSpace($event)" formControlName="CustCode"
+                  [ngClass]="{ 'is-invalid': submitted && f.CustCode.errors }">
+                <div *ngIf="submitted && f.CustCode.errors" class="invalid-feedback">
+                  <div *ngIf="f.CustCode.errors.required"> Cust Code is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Cust Name</label>
+                <input type="text" class="form-control" placeholder="CustName" value="" formControlName="CustName"
+                  [ngClass]="{ 'is-invalid': submitted && f.CustName.errors }">
+                <div *ngIf="submitted && f.CustName.errors" class="invalid-feedback">
+                  <div *ngIf="f.CustName.errors.required"> CustName is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Arabic Name</label>
+                <input type="text" class="form-control" placeholder="Arabic Name" value="" formControlName="ArabicName">
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Cust Type</label>
+                <select class="form-control" placeholder="CustType" formControlName="CustType"
+                  [ngClass]="{ 'is-invalid': submitted && f.CustType.errors }" (change)="onCustTypeChange()">
+                  <option value="">Please Select Cust Type</option>
+                  <option value="Company">Company</option>
+                  <option value="Individual">Individual</option>
+                  <option value="Other">Other</option>
+                </select>
+                <div *ngIf="submitted && f.CustType.errors" class="invalid-feedback">
+                  <div *ngIf="f.CustType.errors.required"> Type is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4" *ngIf="TypeValue =='Company'">
+              <div class="form-group">
+                <label> Company Reg No </label>
+                <input type="text" class="form-control" placeholder="Enter Company RegNo" formControlName="CompanyRegNo"
+                  (keypress)="onlyNumber($event)">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> VATNo </label>
+                <input type="text" class="form-control" placeholder="Enter VATNo" formControlName="VATNo"
+                  (keypress)="onlyNumber($event)">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+           
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Phone No</label>
+                <input type="text" class="form-control" placeholder="Enter Phone No" formControlName="PhoneNo"
+                  (keypress)="onlyNumber($event)">
+              </div>
+            </div>
+            <div class="col-md-4  ">
+              <div class="form-group">
+                <label> Mobile Number </label>
+                <input type="text" class="form-control" placeholder="0923211234567" (keypress)="onlyNumber($event)"
+                  (paste)="(false)" maxlength="13" value="" formControlName="MobileNo"
+                  [ngClass]="{ 'is-invalid': submitted && f.MobileNo.errors }">
+                <div *ngIf="submitted && f.MobileNo.errors" class="invalid-feedback">
+                  <div *ngIf="f.MobileNo.errors.required">Mobiel No is required</div>
+                  <div *ngIf="f.MobileNo.errors.minlength">Tel. No must be at least 10 characters long.</div>
+                  <div *ngIf="f.MobileNo.errors.maxlength">Tel. No must 13 characters long.</div>
+                  <div *ngIf="f.MobileNo.errors.pattern">Only Numeric value required.</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Contact Person</label>
+                <input type="text" class="form-control" placeholder="ContactPerson" value="" formControlName="ContactPerson"
+                  [ngClass]="{ 'is-invalid': submitted && f.ContactPerson.errors }">
+                <div *ngIf="submitted && f.ContactPerson.errors" class="invalid-feedback">
+                  <div *ngIf="f.ContactPerson.errors.required"> Contact Person is required</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+           
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> BankName</label>
+                <input type="text" class="form-control" placeholder="Enter BankName" formControlName="BankName"
+                 >
+              </div>
+            </div>
+           
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> IBAN</label>
+                <input type="text" class="form-control" placeholder="Enter IBAN" formControlName="IBAN"
+                 >
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> SwiftCode</label>
+                <input type="text" class="form-control" placeholder="Enter SwiftCode" formControlName="SwiftCode"
+                 >
+              </div>
+            </div>
+            
+            
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Beneficiary Name</label>
+                <input type="text" class="form-control" placeholder="BeneficiaryName" value="" formControlName="BeneficiaryName"
+                  [ngClass]="{ 'is-invalid': submitted && f.BeneficiaryName.errors }">
+                <div *ngIf="submitted && f.BeneficiaryName.errors" class="invalid-feedback">
+                  <div *ngIf="f.BeneficiaryName.errors.required"> Beneficiary Name is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Payment Terms</label>
+                <select class="form-control" placeholder="PaymentTerms" formControlName="PaymentTerms"
+                  [ngClass]="{ 'is-invalid': submitted && f.PaymentTerms.errors }" >
+                  <option value="">Please Select Payment Terms</option>
+                  <option value="Cash">Cash</option>
+                  <option value="BankTransfer">Bank Transfer</option>
+                </select>
+                <div *ngIf="submitted && f.PaymentTerms.errors" class="invalid-feedback">
+                  <div *ngIf="f.PaymentTerms.errors.required"> Payment Term is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Payment Frequency</label>
+                <select class="form-control" placeholder="PaymentFrequency" formControlName="PaymentFrequency"
+                  [ngClass]="{ 'is-invalid': submitted && f.PaymentFrequency.errors }" >
+
+                  <option value="">Please Select Payment Frequency</option>
+                  <option value="Daily">Daily</option>
+                  <option value="Monthly">Monthly</option>
+                  <option value="Quarterly">Quarterly</option>
+                  <option value="Quarterly">Semi</option>
+                 
+                </select>
+                <div *ngIf="submitted && f.PaymentFrequency.errors" class="invalid-feedback">
+                  <div *ngIf="f.PaymentFrequency.errors.required"> Payment Frequency is required</div>
+                </div>
+              </div>
+            </div>
+
+            
+            
+          </div>
+          
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Current Balance</label>
+                <input type="text" class="form-control" placeholder="Current Balance" 
+                value="" formControlName="CurrentBalance">
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label> Status</label>
+                <select class="form-control" placeholder="Status" formControlName="Status"
+                  [ngClass]="{ 'is-invalid': submitted && f.Status.errors }" >
+                 
+                  <option value="">Please Select Status</option>
+                  <option value="UnderContract">Under Contract</option>
+                  <option value="Lead">Lead</option>
+                </select>
+                <div *ngIf="submitted && f.Status.errors" class="invalid-feedback">
+                  <div *ngIf="f.Status.errors.required"> Status is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Contract No</label>
+                <input type="text" class="form-control" placeholder="Contract No" 
+                value="" formControlName="ContractNo">
+              </div>
+            </div>
+            
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 text-right">
+              <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> <span *ngIf="!isUpdate">
+                  Create</span> <span *ngIf="isUpdate"> Update</span>
+              </button>
+              <button type="reset" class="btn btn-danger ml-2" (click)="clearForm()"><i class="fa fa-ban"></i>
+                Reset</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card-header">
+            <h5 class="card-title"> <i class="fa fa-align-justify"></i> Customer Outsourcing List </h5>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card-header">
+            <div class="card-title text-right">
+              Search Here: <input type="text" [(ngModel)]="searchData">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th> CustCode</th>
+              <th> CustName</th>
+              <th> ArabicName</th>
+              <th> CustType</th>
+              <th> CompanyRegNo</th>
+              <th>VATNo</th>
+              <th> PhoneNo</th>
+              <th> MobileNo</th>
+              <th> ContactPerson</th>
+              <th> BankName</th>
+              <th> IBAN</th>
+              <th>SwiftCode</th>
+              <th> BeneficiaryName</th>
+              <th> PaymentTerms</th>
+              <th> PaymentFrequency</th>
+              <th> CurrentBalance</th>
+              <th> Status</th>
+              <th>ContractNo</th>
+              <th>CreatedBy</th>
+              <th>Action</th>
+
+            </thead>
+            <tbody>
+              <tr *ngFor='let p of cusOutsourcingList | filter:searchData; let i = index'>
+                <td>{{p.custCode}} </td>
+                <td>{{p.custName}} </td>
+                <td>{{p.arabicName}} </td>
+                <td>{{p.custType}} </td>
+                <td>{{p.companyRegNo}} </td>
+                <td>{{p.vatNo}} </td>
+                <td>{{p.phoneNo}} </td>
+                <td>{{p.mobileNo}} </td>
+                <td>{{p.contactPerson}} </td>
+                <td>{{p.bankName}} </td>
+                <td>{{p.iBAN}} </td>
+                <td>{{p.swiftCode}} </td>
+                <td>{{p.beneficiaryName}} </td>
+                <td>{{p.paymentTerms}} </td>
+                <td>{{p.paymentFrequency}} </td>
+                <td>{{p.currentBalance}} </td>
+                <td>{{p.status}} </td>
+                <td>{{p.contractNo}} </td>
+                <td>{{p.createdBy}} </td>
+                
+                <td>
+                  <i class="fa fa-edit clickable" (click)="Update(p)"></i>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
