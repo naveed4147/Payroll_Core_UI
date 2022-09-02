@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { InputFieldValidator } from 'app/_helper/InputFieldValidator';
-import { EmpcategoryService } from 'app/_services/empcategory.service';
 import { ToastrService } from 'ngx-toastr';
+import { InputFieldValidator } from '../../_helper/InputFieldValidator';
+import { EmpcategoryService } from '../../_services/empcategory.service';
 
 @Component({
   selector: 'app-empCategories',

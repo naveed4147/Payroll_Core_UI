@@ -3,8 +3,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ConfigService } from 'app/_helper/LoadConfigFile';
-import { HandleError } from 'app/_helper/HandleError';
+import { ConfigService } from '../_helper/LoadConfigFile';
+import { HandleError } from '../_helper/HandleError';
 
 
 @Injectable({

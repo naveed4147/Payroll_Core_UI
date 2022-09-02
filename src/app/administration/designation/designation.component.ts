@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { InputFieldValidator } from 'app/_helper/InputFieldValidator';
-import { DesignationService } from 'app/_services/designation.service';
 import { ToastrService } from 'ngx-toastr';
+import { InputFieldValidator } from '../../_helper/InputFieldValidator';
+import { DesignationService } from '../../_services/designation.service';
 
 @Component({
   selector: 'app-designation',

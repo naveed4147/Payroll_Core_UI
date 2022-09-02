@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { InputFieldValidator } from 'app/_helper/InputFieldValidator';
-import { DepartmentService } from 'app/_services/Department.service';
 import { ToastrService } from 'ngx-toastr';
+import { InputFieldValidator } from '../../_helper/InputFieldValidator';
+import { DepartmentService } from '../../_services/Department.service';
 
 @Component({
   selector: 'app-departments',

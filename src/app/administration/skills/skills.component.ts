@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { InputFieldValidator } from 'app/_helper/InputFieldValidator';
-import { SkillsService } from 'app/_services/skills.service';
 import { ToastrService } from 'ngx-toastr';
+import { InputFieldValidator } from '../../_helper/InputFieldValidator';
+import { SkillsService } from '../../_services/skills.service';
 
 @Component({
   selector: 'app-skills',

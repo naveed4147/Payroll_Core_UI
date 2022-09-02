@@ -1,10 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { InputFieldValidator } from 'app/_helper/InputFieldValidator';
-import { EmpcategoryService } from 'app/_services/empcategory.service';
-import { SharedService } from 'app/_services/shared.service';
+
 import { ToastrService } from 'ngx-toastr';
+import { InputFieldValidator } from '../../_helper/InputFieldValidator';
+import { SharedService } from '../../_Services/shared.service';
 
 @Component({
   selector: 'app-leave',

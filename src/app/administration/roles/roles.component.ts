@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { InputFieldValidator } from 'app/_helper/InputFieldValidator';
-import { DepartmentService } from 'app/_services/Department.service';
-import { RolesService } from 'app/_services/roles.service';
 import { ToastrService } from 'ngx-toastr';
+import { RolesService } from '../../_services/roles.service';
 
 @Component({
   selector: 'app-roles',

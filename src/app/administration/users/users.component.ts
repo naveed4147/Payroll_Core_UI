@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { InputFieldValidator } from 'app/_helper/InputFieldValidator';
-import { DepartmentService } from 'app/_services/Department.service';
-import { RolesService } from 'app/_services/roles.service';
-import { UsersService } from 'app/_services/Users.service';
 import { ToastrService } from 'ngx-toastr';
+import { InputFieldValidator } from '../../_helper/InputFieldValidator';
+import { DepartmentService } from '../../_services/Department.service';
+import { RolesService } from '../../_services/roles.service';
+import { UsersService } from '../../_services/Users.service';
 
 @Component({
   selector: 'app-users',
